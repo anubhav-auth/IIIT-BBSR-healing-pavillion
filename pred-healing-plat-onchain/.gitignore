@@ -1,0 +1,55 @@
+# Node modules and dependencies
+node_modules/
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# Compiled programs and generated files
+/target/
+/dist/
+/programs/**/target/
+/programs/**/node_modules/
+/tests/**/target/
+/tests/**/node_modules/
+
+# Anchor and Solana CLI artifacts
+.anchor/
+.mpl-token-metadata/
+.solana/
+
+# Build outputs
+**/target/
+**/coverage/
+**/cache/
+**/dist/
+**/out/
+
+# Anchor-generated IDL and keypairs
+**/target/idl/
+**/target/types/
+**/target/deploy/
+**/target/bpfel-unknown/
+**/target/x86_64-pc/
+**/target/wasm32/
+**/target/*.so
+**/target/*.d
+**/target/*.rlib
+**/target/*.rmeta
+
+# Anchor secrets and configs
+/target/deploy/*.keypair.json
+tests/.anchor/cluster.json
+tests/.anchor/id.json
+tests/.anchor/target/
+wallet.json
+.env
+*.local
+*.bak
+
+# VSCode and IDE files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+*.swn
