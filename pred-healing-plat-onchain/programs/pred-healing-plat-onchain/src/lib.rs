@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 
-declare_id!("BWw9DujLHC4hPXCzgpuYq9D7dQg82RdfXjmgPfCNxLt6");
+
+declare_id!("ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo");
 
 #[program]
 pub mod pred_healing_plat_onchain {

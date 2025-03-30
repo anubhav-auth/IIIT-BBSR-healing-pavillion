@@ -1,0 +1,504 @@
+{
+  "accounts": [
+    {
+      "discriminator": [
+        158,
+        212,
+        202,
+        25,
+        123,
+        214,
+        179,
+        115
+      ],
+      "name": "PlayerTradingCard"
+    }
+  ],
+  "address": "ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo",
+  "errors": [
+    {
+      "code": 6000,
+      "msg": "Overflow error occurred.",
+      "name": "Overflow"
+    },
+    {
+      "code": 6001,
+      "msg": "Not authorized to perform this action.",
+      "name": "NotAuthorized"
+    },
+    {
+      "code": 6002,
+      "msg": "Cannot remove owner from authorized viewers.",
+      "name": "CannotRemoveOwner"
+    },
+    {
+      "code": 6003,
+      "msg": "Emergency access has expired.",
+      "name": "EmergencyAccessExpired"
+    }
+  ],
+  "instructions": [
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player_trading_card"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "new_viewer",
+          "type": "pubkey"
+        }
+      ],
+      "discriminator": [
+        95,
+        50,
+        247,
+        84,
+        60,
+        199,
+        169,
+        121
+      ],
+      "name": "add_authorized_viewer"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "signer": true
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        176,
+        211,
+        143,
+        154,
+        81,
+        146,
+        170,
+        19
+      ],
+      "name": "delete_player"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player_trading_card"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        226,
+        118,
+        213,
+        123,
+        71,
+        20,
+        217,
+        6
+      ],
+      "name": "disable_emergency_access"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player_trading_card"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "emergency_pubkey",
+          "type": "pubkey"
+        },
+        {
+          "name": "duration_seconds",
+          "type": "i64"
+        }
+      ],
+      "discriminator": [
+        239,
+        8,
+        88,
+        28,
+        186,
+        110,
+        205,
+        172
+      ],
+      "name": "enable_emergency_access"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "address": "11111111111111111111111111111111",
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "player_id",
+          "type": "string"
+        },
+        {
+          "name": "player_name",
+          "type": "string"
+        },
+        {
+          "name": "player_age",
+          "type": "u64"
+        },
+        {
+          "name": "player_gender",
+          "type": "u8"
+        },
+        {
+          "name": "player_house",
+          "type": "string"
+        },
+        {
+          "name": "player_blood_grp",
+          "type": "string"
+        },
+        {
+          "name": "player_emergency_cont",
+          "type": "string"
+        }
+      ],
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "name": "initialize"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player_trading_card"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "viewer_to_remove",
+          "type": "pubkey"
+        }
+      ],
+      "discriminator": [
+        96,
+        68,
+        224,
+        245,
+        197,
+        144,
+        138,
+        199
+      ],
+      "name": "remove_authorized_viewer"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player_trading_card"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "health_data_hash",
+          "type": "string"
+        },
+        {
+          "name": "health_summary",
+          "type": {
+            "option": "string"
+          }
+        }
+      ],
+      "discriminator": [
+        186,
+        121,
+        150,
+        217,
+        123,
+        85,
+        223,
+        75
+      ],
+      "name": "update_health_data"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player_trading_card"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "player_name",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "player_age",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "player_house",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "player_blood_grp",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "player_emergency_cont",
+          "type": {
+            "option": "string"
+          }
+        }
+      ],
+      "discriminator": [
+        121,
+        226,
+        23,
+        97,
+        86,
+        222,
+        10,
+        183
+      ],
+      "name": "update_player_info"
+    },
+    {
+      "accounts": [
+        {
+          "name": "player_trading_card"
+        },
+        {
+          "name": "viewer",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "off_chain_data_hash",
+          "type": "string"
+        }
+      ],
+      "discriminator": [
+        171,
+        34,
+        174,
+        113,
+        172,
+        1,
+        192,
+        211
+      ],
+      "name": "verify_health_data",
+      "returns": "bool"
+    }
+  ],
+  "metadata": {
+    "description": "Created with Anchor",
+    "name": "pred_healing_plat_onchain",
+    "spec": "0.1.0",
+    "version": "0.1.0"
+  },
+  "types": [
+    {
+      "name": "EmergencyAccessInfo",
+      "type": {
+        "fields": [
+          {
+            "name": "accessor",
+            "type": "pubkey"
+          },
+          {
+            "name": "expires_at",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "HealthDataRecord",
+      "type": {
+        "fields": [
+          {
+            "name": "hash",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "PlayerTradingCard",
+      "type": {
+        "fields": [
+          {
+            "name": "player_id",
+            "type": "string"
+          },
+          {
+            "name": "player_name",
+            "type": "string"
+          },
+          {
+            "name": "player_age",
+            "type": "u64"
+          },
+          {
+            "name": "player_gender",
+            "type": "u8"
+          },
+          {
+            "name": "player_house",
+            "type": "string"
+          },
+          {
+            "name": "player_blood_grp",
+            "type": "string"
+          },
+          {
+            "name": "player_emergency_cont",
+            "type": "string"
+          },
+          {
+            "name": "health_data_hash",
+            "type": "string"
+          },
+          {
+            "name": "health_data_summary",
+            "type": "string"
+          },
+          {
+            "name": "health_data_history",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "HealthDataRecord"
+                }
+              }
+            }
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "authorized_viewers",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "emergency_access",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "EmergencyAccessInfo"
+                }
+              }
+            }
+          },
+          {
+            "name": "last_updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "update_counter",
+            "type": "u64"
+          }
+        ],
+        "kind": "struct"
+      }
+    }
+  ]
+}

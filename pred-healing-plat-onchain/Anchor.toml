@@ -6,14 +6,19 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-pred_healing_plat_onchain = "BWw9DujLHC4hPXCzgpuYq9D7dQg82RdfXjmgPfCNxLt6"
+pred_healing_plat_onchain = "ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo"
+
+[programs.devnet]
+pred_healing_plat_onchain = "ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+#cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
+
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
