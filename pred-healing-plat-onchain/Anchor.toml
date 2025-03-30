@@ -8,15 +8,15 @@ skip-lint = false
 [programs.localnet]
 pred_healing_plat_onchain = "ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo"
 
-[programs.devnet]
-pred_healing_plat_onchain = "ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo"
+#[programs.devnet]
+#pred_healing_plat_onchain = "ALe6xgAc8QQGpqsqo4zWTUyf6mPrsdUj8T5FrwfTBFGo"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-#cluster = "localnet"
-cluster = "devnet"
+cluster = "localnet"
+#cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 

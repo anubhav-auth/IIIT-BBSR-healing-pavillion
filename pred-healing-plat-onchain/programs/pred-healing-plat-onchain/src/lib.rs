@@ -42,13 +42,13 @@ pub mod pred_healing_plat_onchain {
     ) -> Result<()> {
         let nft = &mut ctx.accounts.player_trading_card;
         
-        // Store previous hash for audit trail
+        
         if nft.health_data_history.len() >= 5 {
-            nft.health_data_history.remove(0); // Remove oldest entry if we have 5 already
+            nft.health_data_history.remove(0); 
         }
         
         if !nft.health_data_hash.is_empty() {
-            // Create temporary variables to avoid borrowing issues
+            
             let current_hash = nft.health_data_hash.clone();
             let current_timestamp = nft.last_updated_at;
             
@@ -58,7 +58,7 @@ pub mod pred_healing_plat_onchain {
             });
         }
         
-        // Update with new data
+        
         nft.health_data_hash = health_data_hash;
         if let Some(summary) = health_summary {
             nft.health_data_summary = summary;
@@ -172,8 +172,6 @@ pub mod pred_healing_plat_onchain {
     }
 
     pub fn delete_player(_ctx: Context<DeletePlayer>) -> Result<()> {
-        // The #[account(mut, close = user)] in the account constraint
-        // automatically handles closing the account and returning the rent
         msg!("Player trading card deleted");
         Ok(())
     }
@@ -245,21 +243,20 @@ pub struct EmergencyAccessInfo {
 
 #[account]
 pub struct PlayerTradingCard {
-    // Player identification info (using Quidditch metaphor)
+    
     pub player_id: String,
     pub player_name: String,
     pub player_age: u64,
     pub player_gender: u8,
-    pub player_house: String,  // Could map to department/ward
+    pub player_house: String,  
     pub player_blood_grp: String,
     pub player_emergency_cont: String,
     
-    // Health data - stored as hash from off-chain processing
-    pub health_data_hash: String,
-    pub health_data_summary: String,  // A brief, non-sensitive summary
-    pub health_data_history: Vec<HealthDataRecord>,  // Last 5 health data updates
     
-    // System metadata
+    pub health_data_hash: String,
+    pub health_data_summary: String,  
+    pub health_data_history: Vec<HealthDataRecord>,  
+
     pub owner: Pubkey,
     pub authorized_viewers: Vec<Pubkey>,
     pub emergency_access: Option<EmergencyAccessInfo>,
@@ -268,22 +265,22 @@ pub struct PlayerTradingCard {
 }
 
 impl PlayerTradingCard {
-    const INIT_SPACE: usize = 8 +   // Discriminator
-                               (4 + 32) +   // player_id
-                               (4 + 32) +   // player_name
-                               8 +          // player_age
-                               1 +          // player_gender
-                               (4 + 32) +   // player_house
-                               (4 + 32) +   // player_blood_grp
-                               (4 + 32) +   // player_emergency_cont
-                               (4 + 64) +   // health_data_hash
-                               (4 + 128) +  // health_data_summary
-                               (4 + 5 * (64 + 8)) + // health_data_history (5 entries max)
-                               32 +         // owner
-                               (4 + 10 * 32) + // authorized_viewers (10 viewers max)
-                               (1 + 32 + 8) + // emergency_access (Option<EmergencyAccessInfo>)
-                               8 +          // last_updated_at
-                               8;           // update_counter
+    const INIT_SPACE: usize = 8 +   
+                               (4 + 32) +   
+                               (4 + 32) +   
+                               8 +          
+                               1 +          
+                               (4 + 32) +   
+                               (4 + 32) +   
+                               (4 + 32) +   
+                               (4 + 64) +   
+                               (4 + 128) +  
+                               (4 + 5 * (64 + 8)) + 
+                               32 +         
+                               (4 + 10 * 32) + 
+                               (1 + 32 + 8) + 
+                               8 +          
+                               8;           
 }
 
 #[error_code]

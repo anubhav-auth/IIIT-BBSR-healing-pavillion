@@ -6,22 +6,22 @@ import { PredHealingPlatOnchain } from '../target/types/pred_healing_plat_onchai
 
 
 describe('pred_healing_plat_onchain', () => {
-  // Configure the client to use the local cluster
+  
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
   const program = anchor.workspace.PredHealingPlatOnchain as Program<PredHealingPlatOnchain>;
   
-  // Generate keypairs
+  
   const owner = Keypair.generate();
   const unauthorizedUser = Keypair.generate();
   const playerCard = Keypair.generate();
 
-  // Test data
+  
   const playerId = "P001";
   const playerName = "Harry Potter";
   const playerAge = new anchor.BN(17);
-  const playerGender = 1; // Assuming 1 for male
+  const playerGender = 1; 
   const playerHouse = "Gryffindor";
   const playerBloodGrp = "O+";
   const playerEmergencyCont = "+44 123 456 7890";
@@ -31,18 +31,15 @@ describe('pred_healing_plat_onchain', () => {
   const unauthorizedSummary = "Unauthorized summary";
 
   before(async () => {
-    // Airdrop SOL to the owner
     await provider.connection.requestAirdrop(owner.publicKey, 10 * anchor.web3.LAMPORTS_PER_SOL);
     
-    // Airdrop SOL to the unauthorized user for testing
     await provider.connection.requestAirdrop(unauthorizedUser.publicKey, 10 * anchor.web3.LAMPORTS_PER_SOL);
     
-    // Wait for confirmations
     await new Promise(resolve => setTimeout(resolve, 1000));
   });
 
   it('Creates a player trading card NFT', async () => {
-    // Initialize player trading card
+
     await program.methods.initialize(
       playerId,
       playerName,
@@ -60,10 +57,9 @@ describe('pred_healing_plat_onchain', () => {
     .signers([owner, playerCard])
     .rpc();
 
-    // Fetch the created account
     const account = await program.account.playerTradingCard.fetch(playerCard.publicKey);
     
-    // Verify the account data
+
     assert.equal(account.playerId, playerId);
     assert.equal(account.playerName, playerName);
     assert.ok(account.playerAge.eq(playerAge));
@@ -91,10 +87,10 @@ describe('pred_healing_plat_onchain', () => {
     .signers([owner])
     .rpc();
 
-    // Fetch the updated account
+    
     const account = await program.account.playerTradingCard.fetch(playerCard.publicKey);
     
-    // Verify the updated data
+    
     assert.equal(account.healthDataHash, healthDataHash);
     assert.equal(account.healthDataSummary, healthSummary);
     assert.equal(account.updateCounter.toNumber(), 1);
@@ -115,14 +111,14 @@ describe('pred_healing_plat_onchain', () => {
       .signers([unauthorizedUser])
       .rpc();
       
-      // If we get here, the transaction succeeded, which is not what we want
+      
       assert.fail("Transaction should have failed with unauthorized user");
     } catch (err) {
-      // This is expected - we want the transaction to fail
+      
       console.log("✅ Correctly rejected update from unauthorized user");
     }
 
-    // Verify the data was not changed
+    
     const account = await program.account.playerTradingCard.fetch(playerCard.publicKey);
     assert.equal(account.healthDataHash, healthDataHash);
     assert.notEqual(account.healthDataHash, unauthorizedHash);
@@ -139,10 +135,8 @@ describe('pred_healing_plat_onchain', () => {
     .signers([owner])
     .rpc();
 
-    // Fetch the updated account
     const account = await program.account.playerTradingCard.fetch(playerCard.publicKey);
     
-    // Verify the viewer was added
     assert.equal(account.authorizedViewers.length, 2);
     assert.equal(account.authorizedViewers[1].toString(), unauthorizedUser.publicKey.toString());
     
@@ -160,10 +154,8 @@ describe('pred_healing_plat_onchain', () => {
     .signers([owner])
     .rpc();
 
-    // Fetch the updated account
     const account = await program.account.playerTradingCard.fetch(playerCard.publicKey);
     
-    // Verify the viewer was removed
     assert.equal(account.authorizedViewers.length, 1);
     
     console.log("✅ Successfully removed authorized viewer");
@@ -179,12 +171,10 @@ describe('pred_healing_plat_onchain', () => {
     .signers([owner])
     .rpc();
 
-    // Try to fetch the account (should fail as it was deleted)
     try {
       await program.account.playerTradingCard.fetch(playerCard.publicKey);
       assert.fail("Account should be deleted");
     } catch (err) {
-      // This is expected as the account should be deleted
       console.log("✅ Successfully verified player trading card deletion");
     }
   });
